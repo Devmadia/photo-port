@@ -22,6 +22,9 @@ describe('Nav compontent', () => {
 describe('emoji is visible', () => {
     it('insert emoji into the h2', () => {
         // Arrange
+        const { getByLabelText } = render(<Nav />);
+
         // Assert
+        expect(getByLabelText('camera')).toHaveTextContent('📸');
     })
 })
