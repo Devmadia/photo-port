@@ -7,6 +7,9 @@ afterEach(cleanup);
 
 describe('Nav compontent', () => {
     // baseline test
+    it('renders', () => {
+        render(<Nav />);
+    });
 
     // snapshot test
 })
