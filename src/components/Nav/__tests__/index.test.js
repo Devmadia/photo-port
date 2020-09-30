@@ -12,4 +12,16 @@ describe('Nav compontent', () => {
     });
 
     // snapshot test
+    it('matches snapshot', () => {
+        const { asFragment } = render(<Nav />);
+        // assert value comparison
+        expect(asFragment()).toMatchSnapshot();
+    });
+})
+
+describe('emoji is visible', () => {
+    it('insert emoji into the h2', () => {
+        // Arrange
+        // Assert
+    })
 })
