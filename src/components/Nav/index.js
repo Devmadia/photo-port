@@ -1,54 +1,50 @@
-import React from 'react';
+import React, { userState } from 'react';
+import { capitalizeFirstLetter } from '../../utils/helpers';
 
-function Nav() {
+function Nav(props) {
+    const {
+        categories = [],
+        setCurrentCategory,
+        currentCategory
+    } = props;
 
-    const categories = [
-        {
-            name: "commerical",
-            description: "Photos of grocery stores, food trucks, and other commercial products",
-        },
-        {
-            name: "portraits", description: "Portraits of people in my life"
-        },
-        {
-            name: "food",
-            description: "Delicious delicacies"
-        },
-        {
-            name: "landscape",
-            description: "Fields, farmhouses, waterfalls, and the beauty of nature",
-        },
-    ];
-
-    function categorySelected() {
-        console.log("hello")
-    }
+    useEffect(() => {
+        document.title = capitalizeFirstLetter(currentCategory.name);
+    }, [currentCategory]);
+    // function categorySelected() {
+    //     console.log("hello")
+    // }
 
     return (
-        <header>
+        <header className="flex-row px-1">
             <h2>
-                <a href="/">
-                    <span role="img" aria-label="camera"> 📸</span> Oh Snap!
+                <a data-testid="link" href="/">
+                    <span role="img" aria-label="camera">📸</span> Oh Snap!
                 </a>
             </h2>
             <nav>
                 <ul className="flex-row">
                     <li className="mx-2">
-                        <a href="#about">
+                        <a data-testid="about" href="#about">
                             About me
                         </a>
                     </li>
-                    <li>
+                    <li className="mx-2">
                         <span>Contact</span>
                     </li>
                     {categories.map((category) => (
-                        <li
-                            className="mx-1"
+                        <li className={`mx-1 ${
+                                currentCategory.name === category.name && 'navActive'
+                                }`} 
                             key={category.name}
                         >
-                                <span onClick={() => categorySelected(category.name)} >
-                                    {category.name}
-                                </span>
+                            <span 
+                                onClick={() => {
+                                    setCurrentCategory(category)
+                                }} 
+                            >
+                                    {capitalizeFirstLetter(category.name)}
+                            </span>
                         </li>
                     ))}
                 </ul>
